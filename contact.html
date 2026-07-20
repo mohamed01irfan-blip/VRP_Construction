@@ -16,6 +16,7 @@
   --cream:#faf8f4;
   --grey:#6b7280;
   --line:#e7e2d8;
+}
     /* ===== TOP BAR ===== */
     .topbar{background:var(--navy-deep); color:#cdd6e8; font-size:13px; padding:8px 0;}
     .topbar .wrap{display:flex; justify-content:flex-end; gap:28px;}
@@ -34,7 +35,7 @@
   .burger span{width:26px; height:2px; background:var(--navy);}
 
 
-}
+
 
 .topbar a,
 .contact-info a {
@@ -147,45 +148,55 @@ footer{
 /* ===== MOBILE NAV ===== */
 @media(max-width:768px){
 
+  /* NAV PANEL */
   nav{
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: -260px; /* hide */
+    width: 260px;
+    height: 100%;
+    background: var(--navy);
+    transition: 0.3s ease;
+    z-index: 100;
   }
 
+  /* SHOW MENU */
+  nav.open{
+    left: 0;
+  }
+
+  /* IMPORTANT: NEVER HIDE UL */
   nav ul{
-    position: absolute;
-    top: 70px;
-    right: 0;
-    background: #fff;
-    width: 220px;
+    display: flex;
     flex-direction: column;
+    margin-top: 80px;
+    padding: 0;
     gap: 0;
-    display: none;
-    border: 1px solid var(--line);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
   }
 
   nav ul li{
-    padding: 12px 15px;
-    border-bottom: 1px solid var(--line);
+    border-bottom: 1px solid rgba(255,255,255,0.2);
   }
 
   nav ul li a{
     display: block;
+    padding: 15px;
+    color: #fff;
   }
 
-  nav.open ul{
-    display: flex;
-  }
-
+  /* BURGER */
   .burger{
     display: flex;
+    cursor: pointer;
+    z-index: 200;
   }
 
-  /* Hide normal menu on mobile */
-  nav ul{
-    display: none;
+  .burger span{
+    width: 25px;
+    height: 3px;
+    background: var(--navy);
   }
-} 
+}
 </style>
 </head>
 
@@ -213,7 +224,7 @@ footer{
         <li><a href="contact.html" class="active">Contact Us</a></li>
       </ul>
     </nav>
-    <div class="burger" onclick="document.getElementById('nav').classList.toggle('open')">
+    <div class="burger" onclick="toggleMenu()">
       <span></span><span></span><span></span>
     </div>
   </div>

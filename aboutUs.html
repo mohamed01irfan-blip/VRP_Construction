@@ -236,7 +236,7 @@ footer{
 }
 
 .about-image img{
-  width: 100%;
+  width: 70%;
   border-radius: 12px;
   transition: 0.3s;
 }
@@ -279,6 +279,80 @@ footer{
   background: var(--navy);
 }
 
+@media(max-width:768px){
+
+  /* ABOUT SECTION */
+  .about-section{
+    padding: 40px 0;
+  }
+
+  .about-header h2{
+    font-size: 24px;
+  }
+
+  .about-header p{
+    font-size: 14px;
+  }
+
+  /* GRID FIX (MOST IMPORTANT) */
+  .about-grid{
+    grid-template-columns: 1fr !important;
+    gap: 25px;
+  }
+
+  /* IMAGE FIX */
+  .about-image{
+    text-align: center;
+  }
+
+  .about-image img{
+    width: 90%;
+    max-width: 280px;
+  }
+
+  /* CONTENT FIX */
+  .about-content{
+    text-align: left;
+  }
+
+  .about-content h3{
+    font-size: 18px;
+    margin-top: 15px;
+  }
+
+  .about-content p{
+    font-size: 14px;
+  }
+
+  /* INFO BOX */
+  .info-box{
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  /* SKILLS */
+  .skills{
+    justify-content: center;
+  }
+
+  .skills span{
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+
+  /* TOPBAR FIX */
+  .topbar .wrap{
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    text-align: center;
+  }
+
+  /* HEADER LOGO */
+  .brand img{
+    height: 60px;
+  }
+}
 </style>
 </head>
 

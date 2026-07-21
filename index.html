@@ -449,30 +449,35 @@ nav a.active{
 
 
 
-
 /* ===== LOGO SLIDER ===== */
 .logo-slider {
   background: var(--cream);
   text-align: center;
+  padding: 40px 20px;
 }
 
+/* Center container */
 .logo-track {
   overflow: hidden;
   margin-top: 40px;
+  display: flex;
+  justify-content: center;
 }
 
+/* Sliding row */
 .logo-slide {
   display: flex;
+  align-items: center;
   gap: 50px;
   animation: scrollLogos 20s linear infinite;
 }
 
+/* Logos */
 .logo-slide img {
-  height: 200px;
+  height: 120px; /* reduced for better fit */
   object-fit: contain;
   opacity: 0.8;
   transition: 0.3s;
-  
 }
 
 .logo-slide img:hover {
@@ -480,13 +485,25 @@ nav a.active{
   transform: scale(1.1);
 }
 
-/* Animation */
+/* Mobile view */
+@media (max-width: 768px) {
+  .logo-slide {
+    gap: 25px;
+  }
 
-
-
-
-
-
+  .logo-slide img {
+    height: 70px; /* smaller logos */
+  }
+} 
+/*
+@keyframes scrollLogos {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}*/
 
 
 

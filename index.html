@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact | VRP Constructions</title>
+<title>Home | VRP Constructions</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
 
@@ -93,12 +93,6 @@
   }
   .cred-item span{font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:#dbe1ec;}
 
-  /* ===== PROJECTS GALLERY ===== */
-  .gallery-main{position:relative; border:1px solid var(--line); padding:14px;}
-  .gallery-main img{width:100%; height:460px; object-fit:cover;}
-  .gallery-thumbs{display:flex; gap:12px; margin-top:14px; overflow-x:auto; padding-bottom:6px;}
-  .gallery-thumbs img{width:150px; height:100px; object-fit:cover; cursor:pointer; opacity:.55; transition:.2s; flex-shrink:0;}
-  .gallery-thumbs img.active{opacity:1; outline:2px solid var(--gold);}
 
   /* ===== TESTIMONIALS ===== */
   .testi-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:28px; margin-top:40px;}
@@ -350,7 +344,7 @@ nav a.active{
   display: flex;
   gap: 15px;
   width: max-content;
-  animation: scrollLeft 20s linear infinite;
+  animation: scrollLeft 30s linear infinite;
 }
 
 /* Mini cards */
@@ -687,6 +681,46 @@ nav a.active{
     font-size: 14px;
   }
 }
+
+
+.gallery-container {
+  margin-top: 40px;
+}
+
+.gallery-main img {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.gallery-thumbs {
+  display: flex;
+  gap: 15px;
+  margin-top: 15px;
+  overflow-x: auto;
+}
+
+.gallery-thumbs img {
+  width: 120px;
+  height: 80px;
+  object-fit: cover;
+  cursor: pointer;
+  border-radius: 6px;
+  opacity: 0.6;
+  transition: 0.3s;
+  border: 2px solid transparent;
+}
+
+.gallery-thumbs img:hover {
+  opacity: 1;
+}
+
+.gallery-thumbs img.active {
+  opacity: 1;
+  border: 2px solid #d4a02a; /* gold color */
+}
 </style>
 </head>
 
@@ -738,7 +772,7 @@ nav a.active{
 <!-- ===== CLIENT LOGOS ===== -->
 <section class="logo-slider section-pad" style="align-items: center;">
   <div class="wrap">
-    <h2 class="section-title">Our Clients<div class="rule"></div></h2>
+    <h2 class="section-title">Our Affiliations<div class="rule"></div></h2>
 
     <div class="logo-track">
       <div class="logo-slide">
@@ -764,14 +798,6 @@ nav a.active{
     <div class="services-slider">
 <div class="slider-track">
 
-  <!-- EXISTING -->
-  <div class="mini-card">🏡 Property Sale</div>
-  <div class="mini-card">📦 Consultancy</div>
-  <div class="mini-card">🏠 House Building</div>
-  <div class="mini-card">📐 Planning & Design</div>
-  <div class="mini-card">🧱 Architecture</div>
-  <div class="mini-card">🔑 Turnkey</div>
-  <div class="mini-card">🔨 Renovation</div>
 
   <!-- NEW EXPERTISE -->
   <div class="mini-card">📐 Architectural Planning</div>
@@ -783,13 +809,6 @@ nav a.active{
   <div class="mini-card">📋 Project Management</div>
   <div class="mini-card">👷 Site Supervision</div>
 
-  <!-- DUPLICATE FOR SMOOTH LOOP -->
-  <div class="mini-card">🏡 Property Sale</div>
-  <div class="mini-card">📦 Consultancy</div>
-  <div class="mini-card">🏠 House Building</div>
-  <div class="mini-card">📐 Planning & Design</div>
-  <div class="mini-card">📐 Architectural Planning</div>
-  <div class="mini-card">📏 2D Floor Plan Design</div>
 
 </div>
     </div>
@@ -848,12 +867,26 @@ nav a.active{
 
 <section class="section-pad" id="projects">
   <div class="wrap">
-    <h2 class="section-title">ONGOING PROJECTS<span class="rule"></span></h2>
-    <div style="margin-top:40px;">
+    <h2 class="section-title">
+      ONGOING PROJECTS <span class="rule"></span>
+    </h2>
+
+    <div class="gallery-container">
+
+      <!-- Main Image -->
       <div class="gallery-main">
-        <img id="mainImg" src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=1400&auto=format&fit=crop" alt="Project">
+        <img id="mainImg" src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=1400&auto=format&fit=crop">
       </div>
-      <div class="gallery-thumbs" id="thumbRow"></div>
+
+      <!-- Thumbnails -->
+      <div class="gallery-thumbs">
+        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=400" onclick="changeImage(this)">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=400" onclick="changeImage(this)">
+        <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=400" onclick="changeImage(this)">
+        <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?q=80&w=400" onclick="changeImage(this)">
+        <img src="https://images.unsplash.com/photo-1600573472550-8090b5e0745e?q=80&w=400" onclick="changeImage(this)">
+      </div>
+
     </div>
   </div>
 </section>
@@ -900,7 +933,7 @@ nav a.active{
         <h3>Visit <span class="accent">Us</span></h3>
         <div class="rule-sm"></div>
         <iframe class="map-frame" loading="lazy"
-          src="https://www.google.com/maps?q=Kanipriya+Complex,+Chinnamanur,+Theni,+Tamil+Nadu+625515&output=embed"></iframe>
+          src="https://www.google.com/maps?q=VRP+Constructions+Theni+Tamil+Nadu&output=embed"></iframe>
       </div>
       <div class="contact-col contact-detail">
         <h3>Contact <span class="accent">Us</span></h3>
@@ -958,6 +991,17 @@ nav a.active{
 
 
 <script>
+
+function changeImage(el) {
+  document.getElementById("mainImg").src = el.src;
+
+  // remove active from all
+  document.querySelectorAll(".gallery-thumbs img")
+    .forEach(img => img.classList.remove("active"));
+
+  // add active to clicked
+  el.classList.add("active");
+}
 // ================= YEAR =================
 document.getElementById('year').textContent = new Date().getFullYear();
 

@@ -169,6 +169,7 @@ html, body {
 body{font-family:'Nunito Sans',sans-serif;}
 .wrap{max-width:1200px;margin:auto;padding:0 20px;}
 
+
 /* HEADER */
 header{
   border-bottom:1px solid var(--line);
@@ -738,6 +739,25 @@ nav a.active{
   opacity: 1;
   border: 2px solid #d4a02a; /* gold color */
 }
+header {
+  position: fixed;
+  top: 30px;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: #fff; /* important */
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 40px; /* set exact height */
+  background: var(--navy-deep);
+  color: #fff;
+  z-index: 1000;
+}
 </style>
 </head>
 
@@ -755,7 +775,7 @@ nav a.active{
 <header>
   <div class="wrap header-inner">
     <a class="brand" href="#home">
-      <img src="VRP_logo-removebg-preview.png" alt="VRP Constructions logo">
+      <img src="images/VRP_logo-removebg-preview.png" alt="VRP Constructions logo">
 
     </a>
     <nav id="nav">
@@ -968,7 +988,7 @@ What impressed me the most was their honesty, transparency, attention to detail,
         </p>
         <p class="hours">Monday – Saturday, 9:00 am – 8:30 pm</p>
       </div>
-<div class="contact-col">
+<div class="contact-colindex.html">
   <h3>Tell <span class="accent">Us</span></h3>
   <div class="rule-sm"></div>
 
@@ -989,15 +1009,14 @@ What impressed me the most was their honesty, transparency, attention to detail,
 <footer>
   <div class="wrap">&copy; <span id="year"></span> <strong>VRP Constructions</strong> · Chinnamanur, Theni. All rights reserved.</div>
 </footer>
-
 <!-- FLOATING CHAT BUTTON -->
-<button id="chatBtn" class="chat-btn">Let's Chat</button>
+<button id="chatBtn" class="chat-btn">💬 Let's Chat</button>
 
 <!-- CHAT BOX -->
 <div id="chatBox" class="chat-box">
   <div class="chat-header">
     <span>Chat with us</span>
-    <button onclick="closeChat()">✖</button>
+    <button id="closeChat">✖</button>
   </div>
 
   <div class="chat-body">
@@ -1006,23 +1025,12 @@ What impressed me the most was their honesty, transparency, attention to detail,
     <input type="text" id="userName" placeholder="Your Name">
     <input type="tel" id="userPhone" placeholder="Phone Number">
     
-    <button onclick="sendToWhatsApp()">Send</button>
+    <button id="sendBtn">Send via WhatsApp</button>
   </div>
 </div>
-
-
 <script>
+document.addEventListener("DOMContentLoaded", function(){
 
-function changeImage(el) {
-  document.getElementById("mainImg").src = el.src;
-
-  // remove active from all
-  document.querySelectorAll(".gallery-thumbs img")
-    .forEach(img => img.classList.remove("active"));
-
-  // add active to clicked
-  el.classList.add("active");
-}
 // ================= YEAR =================
 document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -1032,29 +1040,31 @@ const slides = document.querySelectorAll('.hero-slide');
 const dotsWrap = document.getElementById('heroDots');
 let current = 0;
 
-slides.forEach((_, i) => {
-  const b = document.createElement('button');
-  if(i === 0) b.classList.add('active');
-  b.onclick = () => goToSlide(i);
-  dotsWrap.appendChild(b);
-});
+if(slides.length && dotsWrap){
+  slides.forEach((_, i) => {
+    const b = document.createElement('button');
+    if(i === 0) b.classList.add('active');
+    b.onclick = () => goToSlide(i);
+    dotsWrap.appendChild(b);
+  });
 
-function goToSlide(i){
-  slides[current].classList.remove('active');
-  dotsWrap.children[current].classList.remove('active');
+  function goToSlide(i){
+    slides[current].classList.remove('active');
+    dotsWrap.children[current].classList.remove('active');
 
-  current = i;
+    current = i;
 
-  slides[current].classList.add('active');
-  dotsWrap.children[current].classList.add('active');
+    slides[current].classList.add('active');
+    dotsWrap.children[current].classList.add('active');
+  }
+
+  function changeSlide(dir){
+    let next = (current + dir + slides.length) % slides.length;
+    goToSlide(next);
+  }
+
+  setInterval(() => changeSlide(1), 6000);
 }
-
-function changeSlide(dir){
-  let next = (current + dir + slides.length) % slides.length;
-  goToSlide(next);
-}
-
-setInterval(() => changeSlide(1), 6000);
 
 
 // ================= PROJECT GALLERY =================
@@ -1070,26 +1080,29 @@ const projectImages = [
 const thumbRow = document.getElementById('thumbRow');
 const mainImg = document.getElementById('mainImg');
 
-projectImages.forEach((src, i) => {
-  const img = document.createElement('img');
-  img.src = src;
+if(thumbRow && mainImg){
+  projectImages.forEach((src, i) => {
+    const img = document.createElement('img');
+    img.src = src;
 
-  if(i === 0) img.classList.add('active');
+    if(i === 0) img.classList.add('active');
 
-  img.onclick = () => {
-    mainImg.src = src;
-    thumbRow.querySelectorAll('img').forEach(el => el.classList.remove('active'));
-    img.classList.add('active');
-  };
+    img.onclick = () => {
+      mainImg.src = src;
+      thumbRow.querySelectorAll('img').forEach(el => el.classList.remove('active'));
+      img.classList.add('active');
+    };
 
-  thumbRow.appendChild(img);
-});
+    thumbRow.appendChild(img);
+  });
+}
 
 
 // ================= MOBILE NAV =================
-    function toggleMenu(){
+window.toggleMenu = function(){
   document.getElementById("nav").classList.toggle("open");
 }
+
 
 // ================= CONTACT FORM → WHATSAPP =================
 const form = document.getElementById("contactForm");
@@ -1103,7 +1116,7 @@ if(form){
     var subject = document.getElementById("subject").value;
     var message = document.getElementById("message").value;
 
-    var whatsappNumber = "9180980 92350";
+    var whatsappNumber = "918098092350"; // FIXED
 
     var text = encodeURIComponent(
 `New Enquiry from Website:
@@ -1119,37 +1132,58 @@ Message: ${message}`
     window.open(url, "_blank");
 
     form.reset();
-    alert("Opening WhatsApp...");
   });
 }
 
 
+// ================= CHAT BOX =================
+const chatBtn = document.getElementById("chatBtn");
+const chatBox = document.getElementById("chatBox");
+const sendBtn = document.getElementById("sendBtn");
 
-// OPEN CHAT
-document.getElementById("chatBtn").onclick = function() {
-  document.getElementById("chatBox").style.display = "block";
-};
+if(chatBtn && chatBox && sendBtn){
 
-// CLOSE CHAT
-function closeChat() {
-  document.getElementById("chatBox").style.display = "none";
+  chatBtn.addEventListener("click", () => {
+    chatBox.style.display = "block";
+  });
+
+  window.closeChat = function() {
+    chatBox.style.display = "none";
+  }
+
+  sendBtn.addEventListener("click", function(){
+
+    let name = document.getElementById("userName").value.trim();
+    let phone = document.getElementById("userPhone").value.trim();
+    let message = document.getElementById("userMessage").value.trim();
+
+    if(!name || !phone || !message){
+      alert("Please fill all fields!");
+      return;
+    }
+
+    let whatsappNumber = "918098092350";
+
+    let fullMessage =
+`New Chat Request:
+Name: ${name}
+Phone: ${phone}
+Message: ${message}`;
+
+    let url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(fullMessage)}`;
+
+    window.open(url, "_blank");
+
+    document.getElementById("userName").value = "";
+    document.getElementById("userPhone").value = "";
+    document.getElementById("userMessage").value = "";
+
+    chatBox.style.display = "none";
+  });
+
 }
 
-// SEND TO WHATSAPP
-function sendToWhatsApp() {
-  let name = document.getElementById("userName").value;
-  let phone = document.getElementById("userPhone").value;
-  let message = document.getElementById("userMessage").value;
-
-  let fullMessage = `Name: ${name}%0APhone: ${phone}%0AMessage: ${message}`;
-
-  // 👇 CHANGE THIS NUMBER
-  let whatsappNumber = "91 80980 92350"; 
-
-  let url = `https://wa.me/${whatsappNumber}?text=${fullMessage}`;
-
-  window.open(url, "_blank");
-}
+});
 </script>
 </body>
 </html>

@@ -1210,6 +1210,11 @@ const closeBtn = document.getElementById("closeChatBtn");
 closeBtn.addEventListener("click", () => {
   chatBox.style.display = "none";
 });
+
+function changeImage(el) {
+  const mainImg = document.getElementById("mainImg");
+  mainImg.src = el.src;
+}
 </script>
 </body>
 </html>
